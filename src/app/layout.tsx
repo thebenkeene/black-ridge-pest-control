@@ -16,7 +16,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Altitude Pest Control",
+  title: "Black Ridge Pest Control",
   description: "Reliable pest control services in Reno, NV.",
 };
 
