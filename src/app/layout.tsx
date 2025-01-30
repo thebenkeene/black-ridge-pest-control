@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Navbar from "../components/navbar"; // Ensure the path is correct
-
+import Footer from "../components/footer"; // Import Footer
 import "./globals.css";
 
 const geistSans = localFont({
@@ -30,8 +30,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50`}
       >
-        <Navbar />
+        <Navbar /> {/* Navbar is included here */}
         <main className="min-h-screen">{children}</main>
+        <Footer /> {/* Footer is included here */}
       </body>
     </html>
   );

@@ -6,10 +6,10 @@ export default {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: 'class', // Enable dark mode via class
   theme: {
     extend: {
       colors: {
-        // Custom colors for consistent branding
         background: "var(--background)", // Light or dark background
         foreground: "var(--foreground)", // Light or dark text
         primary: "#22c55e", // Vibrant green
@@ -28,7 +28,19 @@ export default {
       borderRadius: {
         xl: "1rem", // Larger radius for modern rounded corners
       },
+      animation: {
+        fadeIn: 'fadeIn 1s ease-in-out', // Custom fadeIn animation
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' }, 
+          '100%': { opacity: '1' }, 
+        },
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/typography'),
+  ],
 } satisfies Config;
