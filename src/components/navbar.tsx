@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import "animate.css"; // Ensure Animate.css is imported
 
 export default function Navbar() {
@@ -19,23 +20,26 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 w-full z-50">
-      {/* Background Panel - Appears & Slides Down on Scroll */}
+      {/* Background Panel - Slides Down & Becomes Translucent on Scroll */}
       <div
-        className={`absolute top-0 left-0 w-full h-20 bg-[var(--background-dark)] shadow-lg transition-transform duration-500 ${
-          isScrolled ? "translate-y-0 opacity-100" : "translate-y-[-100%] opacity-0"
+        className={`absolute top-0 left-0 w-full h-24 backdrop-blur-md transition-all duration-500 ${
+          isScrolled
+            ? "bg-[#1a1a1a] bg-opacity-80 shadow-lg translate-y-0 opacity-100"
+            : "translate-y-[-100%] opacity-0"
         }`}
       ></div>
 
-      {/* Navbar Content - Drops Down on Page Load */}
-      <nav
-        className="relative max-w-7xl mx-auto px-6 sm:px-8 flex justify-between items-center h-20"
-      >
-        {/* Logo - Drops Down */}
-        <Link
-          href="/"
-          className="text-2xl font-bold text-[var(--primary)] hover:text-[var(--secondary)] transition-transform duration-700 animate__animated animate__fadeInDown animate__delay-1s"
-        >
-          Black Ridge Pest Control
+      {/* Navbar Content - Includes Logo & Menu */}
+      <nav className="relative max-w-7xl mx-auto px-6 sm:px-8 flex justify-between items-center h-24">
+        {/* Logo - Properly Sized */}
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/BlackRidgeLogoReno.webp"
+            alt="Black Ridge Logo"
+            width={200} // Slightly bigger for better visibility
+            height={200} // Matches navbar height better
+            className="max-h-24 object-contain animate__animated animate__fadeInDown animate__delay-1s"
+          />
         </Link>
 
         {/* Desktop Navigation - Each Item Drops Down */}
@@ -62,7 +66,7 @@ export default function Navbar() {
           </li>
         </ul>
 
-        {/* Mobile Menu Button - Drops Down */}
+        {/* Mobile Menu Button */}
         <button
           className="md:hidden text-[var(--primary)] focus:outline-none animate__animated animate__fadeInDown animate__delay-2s"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -89,7 +93,7 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <ul className="absolute top-20 left-0 w-full bg-[var(--background-dark)] text-white flex flex-col items-center space-y-4 py-4 md:hidden animate__animated animate__fadeInDown animate__delay-2.2s">
+          <ul className="absolute top-24 left-0 w-full bg-[var(--background-dark)] bg-opacity-80 backdrop-blur-md text-white flex flex-col items-center space-y-4 py-4 md:hidden animate__animated animate__fadeInDown animate__delay-2.2s">
             <li>
               <Link
                 href="/"

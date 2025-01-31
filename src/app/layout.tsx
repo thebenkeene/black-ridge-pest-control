@@ -28,11 +28,28 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased text-white`}
       >
-        <Navbar /> {/* Navbar is included here */}
-        <main className="min-h-screen">{children}</main>
-        <Footer /> {/* Footer is included here */}
+        {/* 🔹 Global Background & Overlay */}
+        <div
+          className="relative w-full min-h-screen bg-cover bg-center bg-fixed"
+          style={{
+            backgroundImage: "url('/blackRidge1.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundAttachment: "fixed",
+          }}
+        >
+          {/* 🔻 Dark Overlay for Dimmer Background */}
+          <div className="absolute inset-0 bg-black/40"></div>
+
+          {/* 🔹 Content Wrapper (Ensures Overlay Doesn’t Cover Page Content) */}
+          <div className="relative z-10">
+            <Navbar /> {/* Navbar is included here */}
+            <main className="min-h-screen">{children}</main>
+            <Footer /> {/* Footer is included here */}
+          </div>
+        </div>
       </body>
     </html>
   );

@@ -1,7 +1,8 @@
-'use client';
+"use client";
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,12 +11,19 @@ export default function Footer() {
     <footer className="bg-black text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
         
-        {/* Brand Information */}
-        <div className="text-center md:text-left mb-6 md:mb-0">
-          <h3 className="text-xl font-bold mb-4">Black Ridge Pest Control</h3>
-          <p className="text-gray-400">
-            Trusted pest control services in Reno, NV.
-          </p>
+        {/* Logo + Brand Information */}
+        <div className="flex flex-col items-center md:items-start mb-6 md:mb-0">
+          <Link href="/" className="mb-4">
+            <Image
+              src="/BlackRidgeLogoReno.webp"
+              alt="Black Ridge Logo"
+              width={160}
+              height={60}
+              className="max-h-24 object-contain"
+            />
+          </Link>
+          <h3 className="text-xl font-bold mb-2">Black Ridge Pest Control</h3>
+          <p className="text-gray-400">Trusted pest control services in Reno, NV.</p>
         </div>
 
         {/* Quick Links */}
