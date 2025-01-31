@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import Navbar from "../components/navbar"; // Ensure the path is correct
-import Footer from "../components/footer"; // Import Footer
+import Navbar from "../components/navbar";
+import Footer from "../components/footer";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -27,27 +27,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased text-white`}
-      >
-        {/* 🔹 Global Background & Overlay */}
-        <div
-          className="relative w-full min-h-screen bg-cover bg-center bg-fixed"
-          style={{
-            backgroundImage: "url('/blackRidge1.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundAttachment: "fixed",
-          }}
-        >
-          {/* 🔻 Dark Overlay for Dimmer Background */}
-          <div className="absolute inset-0 bg-black/40"></div>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased text-white bg-black`}>
+        {/* 🔹 Background Wrapper */}
+        <div className="relative w-full min-h-screen">
+          {/* ✅ Responsive Full-Screen Background Fix */}
+          <div
+            className="absolute inset-0 w-full h-full bg-cover bg-center bg-fixed md:bg-cover md:bg-center md:bg-fixed"
+            style={{
+              backgroundImage: "url('/blackRidge1.jpg')",
+            }}
+          ></div>
 
-          {/* 🔹 Content Wrapper (Ensures Overlay Doesn’t Cover Page Content) */}
-          <div className="relative z-10">
-            <Navbar /> {/* Navbar is included here */}
-            <main className="min-h-screen">{children}</main>
-            <Footer /> {/* Footer is included here */}
+          {/* ✅ Overlay for Readability */}
+          <div className="absolute inset-0 bg-black/70 md:bg-black/40"></div>
+
+          {/* 🔹 Page Content */}
+          <div className="relative z-10 flex flex-col min-h-screen">
+            <Navbar />
+            <main className="flex-grow">{children}</main>
+            <Footer />
           </div>
         </div>
       </body>
