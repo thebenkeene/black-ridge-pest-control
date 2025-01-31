@@ -28,11 +28,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased text-white bg-black`}>
-        {/* 🔹 Background Wrapper */}
-        <div className="relative w-full min-h-screen">
-          {/* ✅ Responsive Full-Screen Background Fix */}
+        {/* ✅ Background Wrapper */}
+        <div className="relative w-full min-h-screen overflow-hidden">
+          
+          {/* ✅ Background Image (Desktop: fixed, Mobile: absolute full-cover) */}
           <div
-            className="absolute inset-0 w-full h-full bg-cover bg-center bg-fixed md:bg-cover md:bg-center md:bg-fixed"
+            className="absolute inset-0 w-full h-full bg-cover bg-center md:bg-fixed bg-mobile-fallback"
             style={{
               backgroundImage: "url('/blackRidge1.jpg')",
             }}
@@ -41,13 +42,31 @@ export default function RootLayout({
           {/* ✅ Overlay for Readability */}
           <div className="absolute inset-0 bg-black/70 md:bg-black/40"></div>
 
-          {/* 🔹 Page Content */}
+          {/* ✅ Page Content */}
           <div className="relative z-10 flex flex-col min-h-screen">
             <Navbar />
             <main className="flex-grow">{children}</main>
             <Footer />
           </div>
         </div>
+
+        {/* ✅ CSS Fix for iPhone Scaling */}
+        <style>
+          {`
+            @media (max-width: 768px) {
+              .bg-mobile-fallback {
+                background-attachment: scroll !important;
+                background-size: cover !important;
+                background-position: center !important;
+                position: absolute !important;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+              }
+            }
+          `}
+        </style>
       </body>
     </html>
   );
